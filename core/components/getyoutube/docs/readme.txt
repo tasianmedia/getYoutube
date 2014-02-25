@@ -1,10 +1,13 @@
-#getYoutube
-##A simple video retrieval Snippet for MODX Revolution
+--------------------
+Extra: getYoutube
+--------------------
+Version: 1.0.0-beta1
+Released: February 25, 2014
+Since: February 25, 2014
+Author: David Pede <dev@tasianmedia.com> <https://twitter.com/davepede>
 
-###Installation
-Simply download through MODX Package Management, and install.
+A simple video retrieval Snippet for MODX Revolution.
 
-###Documentation
 Official Documentation:
 http://rtfm.modx.com/display/ADDON/getYoutube
 
@@ -14,11 +17,8 @@ http://github.com/tasianmedia/getYoutube
 Bugs & Feature Requests:
 http://github.com/tasianmedia/getYoutube/issues
 
-###Details
-Author: David Pede (dev@tasianmedia.com) (https://twitter.com/davepede)
-
-###Please Note
+Please Note:
 getYoutube is not associated with or endorsed by YouTube, LLC.
 
-###License
+License:
 Released under the GNU General Public License - http://www.gnu.org/licenses/gpl.html

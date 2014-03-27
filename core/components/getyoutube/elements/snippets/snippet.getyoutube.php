@@ -33,16 +33,17 @@ $tpl = !empty($tpl) ? $tpl : 'videoRowTpl';
 //$toPlaceholder = !empty($toPlaceholder) ? $toPlaceholder : ''; //Blank default makes '&toPlaceholder' optional
 $sortby = !empty($sortby) ? $sortby : 'date'; //Acceptable values are: date, rating, title, viewCount
 $safeSearch = !empty($safeSearch) ? $safeSearch : 'none'; //Acceptable values are: none, moderate, strict
-$pageToken = preg_replace('/[^-a-zA-Z0-9_]/','',$_GET['page']); //For pagination
+$videoDefinition = !empty($videoDefinition) ? $videoDefinition : 'any'; //Acceptable values are: any, standard, high
 
 $limit = !empty($limit) ? $limit : '50';
+$pageToken = preg_replace('/[^-a-zA-Z0-9_]/','',$_GET['page']); //For pagination
 $idx = 0; //Starts index at 0
 $totalVar = !empty($totalVar) ? $totalVar : 'total';
 $total = 0;
 
 $output = '';
 
-$url = "https://www.googleapis.com/youtube/v3/search?part=id,snippet$channel&type=video&safeSearch=$safeSearch&maxResults=$limit&order=$sortby&pageToken=$pageToken&key=$apiKey";
+$url = "https://www.googleapis.com/youtube/v3/search?part=id,snippet$channel&type=video&safeSearch=$safeSearch&videoDefinition=$videoDefinition&maxResults=$limit&order=$sortby&pageToken=$pageToken&key=$apiKey";
 
 $json = file_get_contents($url);
 $videos = json_decode($json, TRUE);

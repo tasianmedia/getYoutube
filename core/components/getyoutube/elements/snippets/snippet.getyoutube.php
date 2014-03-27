@@ -32,6 +32,7 @@ $tpl = !empty($tpl) ? $tpl : 'videoRowTpl';
 //$tplWrapper = !empty($tplWrapper) ? $tplWrapper : ''; //Blank default makes '&tplWrapper' optional
 //$toPlaceholder = !empty($toPlaceholder) ? $toPlaceholder : ''; //Blank default makes '&toPlaceholder' optional
 $sortby = !empty($sortby) ? $sortby : 'date'; //Acceptable values are: date, rating, title, viewCount
+$safeSearch = !empty($safeSearch) ? $safeSearch : 'none'; //Acceptable values are: none, moderate, strict
 $pageToken = preg_replace('/[^-a-zA-Z0-9_]/','',$_GET['page']); //For pagination
 
 $limit = !empty($limit) ? $limit : '50';
@@ -41,7 +42,7 @@ $total = 0;
 
 $output = '';
 
-$url = "https://www.googleapis.com/youtube/v3/search?part=id,snippet$channel&type=video&maxResults=$limit&order=$sortby&pageToken=$pageToken&key=$apiKey";
+$url = "https://www.googleapis.com/youtube/v3/search?part=id,snippet$channel&type=video&safeSearch=$safeSearch&maxResults=$limit&order=$sortby&pageToken=$pageToken&key=$apiKey";
 
 $json = file_get_contents($url);
 $videos = json_decode($json, TRUE);

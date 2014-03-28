@@ -64,6 +64,7 @@ if (!empty($prevPageToken) ? $modx->setPlaceholder('prevPage',$modx->makeUrl($mo
   foreach($videos['items'] as $video) {
 
 	/* SET PLACEHOLDERS */
+  $modx->setPlaceholder('id',$video['id']['videoId']);
 	$modx->setPlaceholder('url',"https://www.youtube.com/watch?v=" . $video['id']['videoId']);
   $modx->setPlaceholder('title',$video['snippet']['title']);
   $modx->setPlaceholder('description',$video['snippet']['description']);

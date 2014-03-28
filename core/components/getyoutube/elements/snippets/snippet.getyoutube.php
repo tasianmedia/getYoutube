@@ -48,9 +48,9 @@ $url = "https://www.googleapis.com/youtube/v3/search?part=id,snippet$channel&typ
 $json = file_get_contents($url);
 $videos = json_decode($json, TRUE);
 
-//echo "<pre>";
-//print_r($videos);
-//echo "</pre>";
+echo "<pre>";
+print_r($videos);
+echo "</pre>";
 
 /* SETUP PAGINATION */
 $total = $videos['pageInfo']['totalResults'];
@@ -66,6 +66,7 @@ if (!empty($prevPageToken) ? $modx->setPlaceholder('prevPage',$modx->makeUrl($mo
 	/* SET PLACEHOLDERS */
 	$modx->setPlaceholder('url',"https://www.youtube.com/watch?v=" . $video['id']['videoId']);
   $modx->setPlaceholder('title',$video['snippet']['title']);
+  $modx->setPlaceholder('description',$video['snippet']['description']);
 	$modx->setPlaceholder('publish_date',$video['snippet']['publishedAt']);
 	$modx->setPlaceholder('thumbnail_small',$video['snippet']['thumbnails']['default']['url']);
 	$modx->setPlaceholder('thumbnail_medium',$video['snippet']['thumbnails']['medium']['url']);

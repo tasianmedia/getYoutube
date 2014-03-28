@@ -72,6 +72,7 @@ if (!empty($prevPageToken) ? $modx->setPlaceholder('prevPage',$modx->makeUrl($mo
 	$modx->setPlaceholder('thumbnail_small',$video['snippet']['thumbnails']['default']['url']);
 	$modx->setPlaceholder('thumbnail_medium',$video['snippet']['thumbnails']['medium']['url']);
 	$modx->setPlaceholder('thumbnail_large',$video['snippet']['thumbnails']['high']['url']);
+  $modx->setPlaceholder('channel_title',$video['snippet']['channelTitle']);
 	$idx++; //Increases row count by +1
   $modx->setPlaceholder('idx',$idx);
   

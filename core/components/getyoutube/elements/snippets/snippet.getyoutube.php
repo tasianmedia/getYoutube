@@ -23,6 +23,9 @@
  * Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
+$getyoutube = $modx->getService('getyoutube','getYoutube',$modx->getOption('getyoutube.core_path',null,$modx->getOption('core_path').'components/getyoutube/').'model/getyoutube/',$scriptProperties);
+if (!($getyoutube instanceof getYoutube)) return '';
+ 
 /* set default properties */
 $apiKey = $modx->getOption('apiKey',$scriptProperties);
 $channel = !empty($channel) ? "&channelId=" . $channel : '';
@@ -41,45 +44,8 @@ $idx = 0; //Starts index at 0
 $totalVar = !empty($totalVar) ? $totalVar : 'total';
 $total = 0;
 
-$output = '';
-
-$url = "https://www.googleapis.com/youtube/v3/search?part=id,snippet$channel&type=video&safeSearch=$safeSearch&videoDefinition=$videoDefinition&maxResults=$limit&order=$sortby&pageToken=$pageToken&key=$apiKey";
-
-$json = file_get_contents($url);
-$videos = json_decode($json, TRUE);
-
-echo "<pre>";
-print_r($videos);
-echo "</pre>";
-
-/* SETUP PAGINATION */
-$total = $videos['pageInfo']['totalResults'];
-$modx->setPlaceholder($totalVar,$total);
-$nextPageToken = $videos['nextPageToken'];
-if (!empty($nextPageToken) ? $modx->setPlaceholder('nextPage',$modx->makeUrl($modx->resource->get('id'),'','?page='.$nextPageToken,'full')) : '');
-$prevPageToken = $videos['prevPageToken'];
-if (!empty($prevPageToken) ? $modx->setPlaceholder('prevPage',$modx->makeUrl($modx->resource->get('id'),'','?page='.$prevPageToken,'full')) : '');
-
-//if (!empty($id)) {
-  foreach($videos['items'] as $video) {
-
-	/* SET PLACEHOLDERS */
-  $modx->setPlaceholder('id',$video['id']['videoId']);
-	$modx->setPlaceholder('url',"https://www.youtube.com/watch?v=" . $video['id']['videoId']);
-  $modx->setPlaceholder('title',$video['snippet']['title']);
-  $modx->setPlaceholder('description',$video['snippet']['description']);
-	$modx->setPlaceholder('publish_date',$video['snippet']['publishedAt']);
-	$modx->setPlaceholder('thumbnail_small',$video['snippet']['thumbnails']['default']['url']);
-	$modx->setPlaceholder('thumbnail_medium',$video['snippet']['thumbnails']['medium']['url']);
-	$modx->setPlaceholder('thumbnail_large',$video['snippet']['thumbnails']['high']['url']);
-  $modx->setPlaceholder('channel_title',$video['snippet']['channelTitle']);
-	$idx++; //Increases row count by +1
-  $modx->setPlaceholder('idx',$idx);
-  
-  $rowTpl = $tpl;
-  $results .= $modx->getChunk($rowTpl,$video);
-  }
-//}
-$output = $results;
+require ($getyoutube->config['modelPath'] . 'search.class.php');
+$result = new channel();
+$output = $result->search($apiKey,$channel,$tpl,$sortby,$safeSearch,$videoDefinition,$limit,$pageToken,$idx,$totalVar,$total);
 
 return $output;

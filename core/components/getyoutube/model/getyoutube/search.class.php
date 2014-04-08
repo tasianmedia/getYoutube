@@ -30,10 +30,6 @@ class search {
     $json = file_get_contents($channelUrl);
     $videos = json_decode($json, TRUE);
 
-    //print "<pre>";
-    //print_r($videos);
-    //print "</pre>";
-    
     /* SETUP PAGINATION */
     $total = $videos['pageInfo']['totalResults'];
     $modx->setPlaceholder($totalVar,$total);
@@ -54,9 +50,9 @@ class search {
       $modx->setPlaceholder('title',$video['snippet']['title']);
       $modx->setPlaceholder('description',$video['snippet']['description']);
       $modx->setPlaceholder('publish_date',$video['snippet']['publishedAt']);
-      $modx->setPlaceholder('thumbnail_small',$video['snippet']['thumbnails']['default']['url']);
-      $modx->setPlaceholder('thumbnail_medium',$video['snippet']['thumbnails']['medium']['url']);
-      $modx->setPlaceholder('thumbnail_large',$video['snippet']['thumbnails']['high']['url']);
+      $modx->setPlaceholder('thumbnail_small',$video['snippet']['thumbnails']['default']['url']); //120px wide and 90px tall
+      $modx->setPlaceholder('thumbnail_medium',$video['snippet']['thumbnails']['medium']['url']); //320px wide and 180px tall
+      $modx->setPlaceholder('thumbnail_large',$video['snippet']['thumbnails']['high']['url']); //480px wide and 360px tall
       $modx->setPlaceholder('channel_title',$video['snippet']['channelTitle']);
       /* SET TEMPLATES */
       if (!empty($tplAlt)) {
@@ -88,14 +84,9 @@ class search {
     $json = file_get_contents($videoUrl);
     $videos = json_decode($json, TRUE);
     
-    print "<pre>";
-    print_r($videos);
-    print "</pre>";
-
-    /* SETUP PAGINATION */
+    /* SET TOTAL PLACEHOLDERS */
     $total = $videos['pageInfo']['totalResults'];
     $modx->setPlaceholder($totalVar,$total);
-    $nextPageToken = $videos['nextPageToken'];
     
     $idx = 0; //Starts index at 0
     $total = 0;
@@ -103,16 +94,24 @@ class search {
     $output = '';
     
     foreach($videos['items'] as $video) {
-      /* SET PLACEHOLDERS */
+      /* SET SNIPPET PLACEHOLDERS */
       $modx->setPlaceholder('id',$video['id']['videoId']);
       $modx->setPlaceholder('url',"https://www.youtube.com/watch?v=" . $video['id']['videoId']);
       $modx->setPlaceholder('title',$video['snippet']['title']);
       $modx->setPlaceholder('description',$video['snippet']['description']);
       $modx->setPlaceholder('publish_date',$video['snippet']['publishedAt']);
-      $modx->setPlaceholder('thumbnail_small',$video['snippet']['thumbnails']['default']['url']);
-      $modx->setPlaceholder('thumbnail_medium',$video['snippet']['thumbnails']['medium']['url']);
-      $modx->setPlaceholder('thumbnail_large',$video['snippet']['thumbnails']['high']['url']);
+      $modx->setPlaceholder('thumbnail_small',$video['snippet']['thumbnails']['default']['url']); //120px wide and 90px tall
+      $modx->setPlaceholder('thumbnail_medium',$video['snippet']['thumbnails']['medium']['url']); //320px wide and 180px tall
+      $modx->setPlaceholder('thumbnail_large',$video['snippet']['thumbnails']['high']['url']); //480px wide and 360px tall
       $modx->setPlaceholder('channel_title',$video['snippet']['channelTitle']);
+      /* SET CONTENT DETAIL PLACEHOLDERS */
+      $modx->setPlaceholder('duration',$video['contentDetails']['duration']);
+      /* SET STATISTIC PLACEHOLDERS */
+      $modx->setPlaceholder('viewCount',$video['statistics']['viewCount']);
+      $modx->setPlaceholder('likeCount',$video['statistics']['likeCount']);
+      $modx->setPlaceholder('dislikeCount',$video['statistics']['dislikeCount']);
+      $modx->setPlaceholder('favoriteCount',$video['statistics']['favoriteCount']);
+      $modx->setPlaceholder('commentCount',$video['statistics']['commentCount']);
       /* SET TEMPLATES */
       if (!empty($tplAlt)) {
         if($idx % 2 == 0) { // Checks if index can be divided by 2 (alt)

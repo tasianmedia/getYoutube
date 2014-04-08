@@ -23,12 +23,11 @@
  * Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-class channel {
-  public function search($apiKey,$channel,$tpl,$sortby,$safeSearch,$videoDefinition,$limit,$pageToken,$idx,$totalVar,$total){
+class search {
+  public function channel($channelUrl,$tpl,$tplAlt,$pageToken,$totalVar){
     global $modx;
-    $url = "https://www.googleapis.com/youtube/v3/search?part=id,snippet$channel&type=video&safeSearch=$safeSearch&videoDefinition=$videoDefinition&maxResults=$limit&order=$sortby&pageToken=$pageToken&key=$apiKey";
-
-    $json = file_get_contents($url);
+    
+    $json = file_get_contents($channelUrl);
     $videos = json_decode($json, TRUE);
 
     /* SETUP PAGINATION */
@@ -38,12 +37,14 @@ class channel {
     if (!empty($nextPageToken) ? $modx->setPlaceholder('nextPage',$modx->makeUrl($modx->resource->get('id'),'','?page='.$nextPageToken,'full')) : '');
     $prevPageToken = $videos['prevPageToken'];
     if (!empty($prevPageToken) ? $modx->setPlaceholder('prevPage',$modx->makeUrl($modx->resource->get('id'),'','?page='.$prevPageToken,'full')) : '');
-
+    
+    $idx = 0; //Starts index at 0
+    $total = 0;
+    
     $output = '';
     
     //if (!empty($id)) {
     foreach($videos['items'] as $video) {
-
       /* SET PLACEHOLDERS */
       $modx->setPlaceholder('id',$video['id']['videoId']);
       $modx->setPlaceholder('url',"https://www.youtube.com/watch?v=" . $video['id']['videoId']);
@@ -54,10 +55,19 @@ class channel {
       $modx->setPlaceholder('thumbnail_medium',$video['snippet']['thumbnails']['medium']['url']);
       $modx->setPlaceholder('thumbnail_large',$video['snippet']['thumbnails']['high']['url']);
       $modx->setPlaceholder('channel_title',$video['snippet']['channelTitle']);
-      $idx++; //Increases row count by +1
+      /* SET TEMPLATES */
+      if (!empty($tplAlt)) {
+        if($idx % 2 == 0) { // Checks if index can be divided by 2 (alt)
+          $rowTpl = $tpl;
+        }else{
+          $rowTpl = $tplAlt;
+        }
+      }else{
+        $rowTpl = $tpl;
+      }
+      $idx++; //Increases index by +1
       $modx->setPlaceholder('idx',$idx);
   
-      $rowTpl = $tpl;
       $output .= $modx->getChunk($rowTpl,$video);
     }
     return $output;

@@ -31,7 +31,7 @@ $apiKey = $modx->getOption('apiKey',$scriptProperties);
 $channel = !empty($channel) ? "&channelId=" . $channel : '';
 //$id = !empty($id) ? $id : '';
 $tpl = !empty($tpl) ? $tpl : 'videoRowTpl';
-//$tplAlt = !empty($tplAlt) ? $tplAlt : '';
+$tplAlt = !empty($tplAlt) ? $tplAlt : '';
 //$tplWrapper = !empty($tplWrapper) ? $tplWrapper : ''; //Blank default makes '&tplWrapper' optional
 //$toPlaceholder = !empty($toPlaceholder) ? $toPlaceholder : ''; //Blank default makes '&toPlaceholder' optional
 $sortby = !empty($sortby) ? $sortby : 'date'; //Acceptable values are: date, rating, title, viewCount
@@ -40,12 +40,11 @@ $videoDefinition = !empty($videoDefinition) ? $videoDefinition : 'any'; //Accept
 
 $limit = !empty($limit) ? $limit : '50';
 $pageToken = preg_replace('/[^-a-zA-Z0-9_]/','',$_GET['page']); //For pagination
-$idx = 0; //Starts index at 0
 $totalVar = !empty($totalVar) ? $totalVar : 'total';
-$total = 0;
 
 require ($getyoutube->config['modelPath'] . 'search.class.php');
-$result = new channel();
-$output = $result->search($apiKey,$channel,$tpl,$sortby,$safeSearch,$videoDefinition,$limit,$pageToken,$idx,$totalVar,$total);
+$query = new search();
+$channelUrl = "https://www.googleapis.com/youtube/v3/search?part=id,snippet$channel&type=video&safeSearch=$safeSearch&videoDefinition=$videoDefinition&maxResults=$limit&order=$sortby&pageToken=$pageToken&key=$apiKey";
+$output = $query->channel($channelUrl,$tpl,$tplAlt,$pageToken,$totalVar);
 
 return $output;

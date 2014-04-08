@@ -25,12 +25,12 @@
 
 $getyoutube = $modx->getService('getyoutube','getYoutube',$modx->getOption('getyoutube.core_path',null,$modx->getOption('core_path').'components/getyoutube/').'model/getyoutube/',$scriptProperties);
 if (!($getyoutube instanceof getYoutube)) return '';
- 
+
 /* set default properties */
 $apiKey = $modx->getOption('apiKey',$scriptProperties);
 $mode = !empty($mode) ? $mode : ''; //Acceptable values are: channel, video
-$channel = !empty($channel) ? "&channelId=" . $channel : '';
-$videoId = !empty($videoId) ? $videoId : '';
+$channel = !empty($channel) ? $channel : '';
+$video = !empty($video) ? $video : '';
 $tpl = !empty($tpl) ? $tpl : 'videoRowTpl';
 $tplAlt = !empty($tplAlt) ? $tplAlt : '';
 $toPlaceholder = !empty($toPlaceholder) ? $toPlaceholder : ''; //Blank default makes '&toPlaceholder' optional
@@ -42,20 +42,28 @@ $limit = !empty($limit) ? $limit : '50';
 $pageToken = preg_replace('/[^-a-zA-Z0-9_]/','',$_GET['page']); //For pagination
 $totalVar = !empty($totalVar) ? $totalVar : 'total';
 
-require ($getyoutube->config['modelPath'] . 'search.class.php');
+include_once ($getyoutube->config['modelPath'] . 'search.class.php');
 
 switch ($mode) {
   case "channel":
-    $query = new search();
-    $channelUrl = "https://www.googleapis.com/youtube/v3/search?part=id,snippet$channel&type=video&safeSearch=$safeSearch&videoDefinition=$videoDefinition&maxResults=$limit&order=$sortby&pageToken=$pageToken&key=$apiKey";
-    $output = $query->channel($channelUrl,$tpl,$tplAlt,$toPlaceholder,$pageToken,$totalVar);
+    if (!empty($channel)) {
+      $query = new search();
+      $channelUrl = "https://www.googleapis.com/youtube/v3/search?part=id,snippet&channelId=$channel&type=video&safeSearch=$safeSearch&videoDefinition=$videoDefinition&maxResults=$limit&order=$sortby&pageToken=$pageToken&key=$apiKey";
+      $output = $query->channel($channelUrl,$tpl,$tplAlt,$toPlaceholder,$pageToken,$totalVar);
+    }else{
+      $modx->log(modX::LOG_LEVEL_ERROR, 'getYoutube() - &channel is required');
+    }
     break;
   case "video":
-    $query = new search();
-    $videoUrl = "https://www.googleapis.com/youtube/v3/videos?part=id,snippet,contentDetails,statistics&id=$videoId&key=$apiKey";
-    $output = $query->video($videoUrl,$tpl,$tplAlt,$toPlaceholder,$totalVar);
+    if (!empty($video)) {
+      $query = new search();
+      $videoUrl = "https://www.googleapis.com/youtube/v3/videos?part=id,snippet,contentDetails,statistics&id=$video&key=$apiKey";
+      $output = $query->video($videoUrl,$tpl,$tplAlt,$toPlaceholder,$totalVar);
+    }else{
+      $modx->log(modX::LOG_LEVEL_ERROR, 'getYoutube() - &video is required');
+    }
     break;
-  default: echo "No match!"; break;
+  default: $modx->log(modX::LOG_LEVEL_ERROR, 'getYoutube() - &mode is required'); break;
 };
 
 return $output;

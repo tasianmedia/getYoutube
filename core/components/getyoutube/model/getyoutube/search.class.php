@@ -27,7 +27,8 @@ class search {
   public function channel($channelUrl,$tpl,$tplAlt,$toPlaceholder,$pageToken,$totalVar){
     global $modx;
     
-    $json = file_get_contents($channelUrl);
+    $json = file_get_contents($channelUrl)
+    or $modx->log(modX::LOG_LEVEL_ERROR, 'getYoutube() - Channel API request not recognised');
     $videos = json_decode($json, TRUE);
 
     /* SETUP PAGINATION */
@@ -81,7 +82,8 @@ class search {
   public function video($videoUrl,$tpl,$tplAlt,$toPlaceholder,$totalVar){
     global $modx;
     
-    $json = file_get_contents($videoUrl);
+    $json = file_get_contents($videoUrl)
+    or $modx->log(modX::LOG_LEVEL_ERROR, 'getYoutube() - Video API request not recognised');
     $videos = json_decode($json, TRUE);
     
     /* SET TOTAL PLACEHOLDERS */
@@ -95,8 +97,8 @@ class search {
     
     foreach($videos['items'] as $video) {
       /* SET SNIPPET PLACEHOLDERS */
-      $modx->setPlaceholder('id',$video['id']['videoId']);
-      $modx->setPlaceholder('url',"https://www.youtube.com/watch?v=" . $video['id']['videoId']);
+      $modx->setPlaceholder('id',$video['id']);
+      $modx->setPlaceholder('url',"https://www.youtube.com/watch?v=" . $video['id']);
       $modx->setPlaceholder('title',$video['snippet']['title']);
       $modx->setPlaceholder('description',$video['snippet']['description']);
       $modx->setPlaceholder('publish_date',$video['snippet']['publishedAt']);

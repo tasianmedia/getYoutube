@@ -29,8 +29,8 @@ class getYoutube {
     function __construct(modX &$modx,array $config = array()) {
         $this->modx =& $modx;
  
-        $corePath = $this->modx->getOption('getyoutube.core_path',$config,$this->modx->getOption('core_path').'components/doodles/');
-        //$assetsUrl = $this->modx->getOption('getyoutube.assets_url',$config,$this->modx->getOption('assets_url').'components/doodles/');
+        $corePath = $this->modx->getOption('getyoutube.core_path',$config,$this->modx->getOption('core_path').'components/getyoutube/');
+        //$assetsUrl = $this->modx->getOption('getyoutube.assets_url',$config,$this->modx->getOption('assets_url').'components/getyoutube/');
         $this->config = array_merge(array(
             'basePath' => $corePath,
             'corePath' => $corePath,

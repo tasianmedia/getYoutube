@@ -24,7 +24,7 @@
  */
 
 class search {
-  public function channel($channelUrl,$tpl,$tplAlt,$pageToken,$totalVar){
+  public function channel($channelUrl,$tpl,$tplAlt,$toPlaceholder,$pageToken,$totalVar){
     global $modx;
     
     $json = file_get_contents($channelUrl);
@@ -43,7 +43,6 @@ class search {
     
     $output = '';
     
-    //if (!empty($id)) {
     foreach($videos['items'] as $video) {
       /* SET PLACEHOLDERS */
       $modx->setPlaceholder('id',$video['id']['videoId']);
@@ -68,7 +67,14 @@ class search {
       $idx++; //Increases index by +1
       $modx->setPlaceholder('idx',$idx);
   
-      $output .= $modx->getChunk($rowTpl,$video);
+      $results .= $modx->getChunk($rowTpl,$video);
+    }
+    if(!empty($results)) {
+      if (!empty($toPlaceholder)) {
+        $output = $modx->setPlaceholder($toPlaceholder,$results); //Set '$toPlaceholder' placeholder
+      }else{
+        $output = $results;
+      }
     }
     return $output;
   }

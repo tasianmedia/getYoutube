@@ -1,5 +1,5 @@
 Changelog for getYoutube.
 
-getYoutube 1.0.0-beta1 (February 25, 2014)
+getYoutube 1.0.0-pl (April 14, 2014)
 ====================================
 - Initial content.

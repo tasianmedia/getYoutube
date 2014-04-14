@@ -3,8 +3,8 @@
  * A simple video retrieval Snippet for MODX Revolution.
  *
  * @author David Pede <dev@tasianmedia.com> <https://twitter.com/davepede>
- * @version 1.0.0-beta1
- * @released February 25, 2014
+ * @version 1.0.0-pl
+ * @released April 14, 2014
  * @since February 25, 2014
  * @package getyoutube
  *
@@ -27,20 +27,19 @@ $getyoutube = $modx->getService('getyoutube','getYoutube',$modx->getOption('gety
 if (!($getyoutube instanceof getYoutube)) return '';
 
 /* set default properties */
-$apiKey = $modx->getOption('apiKey',$scriptProperties);
+$apiKey = $modx->getOption('getyoutube.api_key',$scriptProperties);
 $mode = !empty($mode) ? $mode : ''; //Acceptable values are: channel, video
 $channel = !empty($channel) ? $channel : '';
 $video = !empty($video) ? $video : '';
-$tpl = !empty($tpl) ? $tpl : 'videoRowTpl';
+$tpl = !empty($tpl) ? $tpl : '';
 $tplAlt = !empty($tplAlt) ? $tplAlt : '';
 $toPlaceholder = !empty($toPlaceholder) ? $toPlaceholder : ''; //Blank default makes '&toPlaceholder' optional
-$sortby = !empty($sortby) ? $sortby : 'date'; //Acceptable values are: date, rating, title, viewCount
-$safeSearch = !empty($safeSearch) ? $safeSearch : 'none'; //Acceptable values are: none, moderate, strict
-$videoDefinition = !empty($videoDefinition) ? $videoDefinition : 'any'; //Acceptable values are: any, standard, high
+$sortby = !empty($sortby) ? $sortby : ''; //Acceptable values are: date, rating, title, viewCount
+$safeSearch = !empty($safeSearch) ? $safeSearch : ''; //Acceptable values are: none, moderate, strict
 
-$limit = !empty($limit) ? $limit : '50';
+$limit = !empty($limit) ? $limit : '';
 $pageToken = preg_replace('/[^-a-zA-Z0-9_]/','',$_GET['page']); //For pagination
-$totalVar = !empty($totalVar) ? $totalVar : 'total';
+$totalVar = !empty($totalVar) ? $totalVar : '';
 
 include_once ($getyoutube->config['modelPath'] . 'search.class.php');
 
@@ -48,7 +47,7 @@ switch ($mode) {
   case "channel":
     if (!empty($channel)) {
       $query = new search();
-      $channelUrl = "https://www.googleapis.com/youtube/v3/search?part=id,snippet&channelId=$channel&type=video&safeSearch=$safeSearch&videoDefinition=$videoDefinition&maxResults=$limit&order=$sortby&pageToken=$pageToken&key=$apiKey";
+      $channelUrl = "https://www.googleapis.com/youtube/v3/search?part=id,snippet&channelId=$channel&type=video&safeSearch=$safeSearch&maxResults=$limit&order=$sortby&pageToken=$pageToken&key=$apiKey";
       $output = $query->channel($channelUrl,$tpl,$tplAlt,$toPlaceholder,$pageToken,$totalVar);
     }else{
       $modx->log(modX::LOG_LEVEL_ERROR, 'getYoutube() - &channel is required');

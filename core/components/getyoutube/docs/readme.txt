@@ -10,7 +10,7 @@ Copyright: (C) 2014 David Pede. All rights reserved. <dev@tasianmedia.com>
 A simple video retrieval Snippet for MODX Revolution.
 
 Official Documentation:
-http://rtfm.modx.com/display/ADDON/getYoutube
+http://rtfm.modx.com/extras/revo/getyoutube
 
 GitHub Repository:
 http://github.com/tasianmedia/getYoutube

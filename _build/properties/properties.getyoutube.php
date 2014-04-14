@@ -33,14 +33,14 @@ $properties = array(
   ),
   array(
     'name' => 'channel',
-    'desc' => 'The numeric ID of a YouTube Channel to search.',
+    'desc' => 'The numeric ID of a YouTube Channel to search. All videos within the channel will be returned.',
     'type' => 'textfield',
     'options' => '',
     'value' => '',
   ),
   array(
-    'name' => 'id',
-    'desc' => 'A comma-separated list of numeric video IDs to search.',
+    'name' => 'video',
+    'desc' => 'A comma-separated list of numeric video IDs to return.',
     'type' => 'textfield',
     'options' => '',
     'value' => '',
@@ -94,7 +94,7 @@ $properties = array(
   ),
   array(
     'name' => 'safeSearch',
-    'desc' => 'Select whether the results should include restricted content as well as standard content. [OPTIONS:  none, moderate, strict]',
+    'desc' => 'Select whether the results should include restricted content as well as standard content. [OPTIONS: none, moderate, strict]',
     'type' => 'list',
     'options' => array(
       array('text' => 'none','value' => 'none'),

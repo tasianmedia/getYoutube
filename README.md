@@ -5,8 +5,7 @@
 Simply download through MODX Package Management, and install.
 
 ###Documentation
-Official Documentation:
-http://rtfm.modx.com/display/ADDON/getYoutube
+Official Documentation: http://rtfm.modx.com/extras/revo/getyoutube
 
 GitHub Repository: http://github.com/tasianmedia/getYoutube
 

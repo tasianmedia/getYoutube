@@ -1,7 +1,7 @@
 #getYoutube
-##A simple video retrieval Snippet for MODX Revolution
+###A simple video retrieval Snippet for MODX Revolution
 
-###Installation
+####Installation
 Simply download through MODX Package Management, and install.
 
 ###Documentation

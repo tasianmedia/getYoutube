@@ -5,11 +5,10 @@
 Simply download through MODX Package Management, and install.
 
 ###Documentation
-Official Documentation: http://rtfm.modx.com/extras/revo/getyoutube
-
-GitHub Repository: http://github.com/tasianmedia/getYoutube
-
-Bugs & Feature Requests: http://github.com/tasianmedia/getYoutube/issues
+- Official Documentation: http://rtfm.modx.com/extras/revo/getyoutube
+- GitHub Repository: http://github.com/tasianmedia/getYoutube
+- Bugs & Feature Requests: http://github.com/tasianmedia/getYoutube/issues
+If you would like to submit a Pull Request, please make sure you target the 'develop' branch.
 
 ###Details
 Author: David Pede (dev@tasianmedia.com) (https://twitter.com/davepede)

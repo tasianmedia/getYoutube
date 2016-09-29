@@ -1,0 +1,120 @@
+{
+  "name": "getYoutube"
+  ,"lowCaseName": "getyoutube"
+  ,"description": "A simple video retrieval Snippet for MODX Revolution"
+  ,"author": "David Pede <dev@tasianmedia.com> <https://twitter.com/davepede>"
+  ,"version": "1.0.0-pl"
+  ,"package":{
+    "actions": [{
+      "id": 1
+      ,"controller": "index"
+    }]
+    ,"elements": {
+      "categories": [{
+        "name": "getYoutube"
+      }]
+      ,"snippets": [{
+        "name": "getYoutube"
+        ,"description": "A video retrieval Snippet for MODX Revolution. This snippet uses the YouTube Data API (v3) to search for specified channels or videos and return the associated data."
+        ,"file": "snippet.getyoutube.php"
+        ,"properties": [{
+          "name": "mode"
+          ,"description": "Select the search mode. [OPTIONS: channel or video] [REQUIRED]"
+          ,"type": "list"
+          ,"options": [{
+            "text": "channel",
+            "value": "channel"
+          },{
+            "text": "video",
+            "value": "video"
+          }]
+          ,"value": "video"
+        },{
+          "name": "channel"
+          ,"description": "The numeric ID of a YouTube Channel to search. All videos within the channel will be returned."
+          ,"type": "textfield"
+          ,"value": ""
+        },{
+          "name": "video"
+          ,"description": "A comma-separated list of numeric video IDs to return."
+          ,"type": "textfield"
+          ,"value": ""
+        },{
+          "name": "tpl"
+          ,"description": "Name of a chunk serving as a template. [REQUIRED]"
+          ,"type": "textfield"
+          ,"value": "videoTpl"
+        },{
+          "name": "tplAlt"
+          ,"description": "Name of a chunk serving as a template for every other Video."
+          ,"type": "textfield"
+          ,"value": ""
+        },{
+          "name": "sortby"
+          ,"description": "A placeholder name to sort by. [OPTIONS: date, rating, title, viewCount]"
+          ,"type": "list"
+          ,"options": [{
+            "text": "date",
+            "value": "date"
+          },{
+            "text": "rating",
+            "value": "rating"
+          },{
+            "text": "title",
+            "value": "title"
+          },{
+            "text": "viewCount",
+            "value": "viewCount"
+          }]
+          ,"value": "date"
+        },{
+          "name": "toPlaceholder"
+          ,"description": "If set, will assign the output to this placeholder instead of outputting it directly."
+          ,"type": "textfield"
+          ,"value": ""
+        },{
+          "name": "limit"
+          ,"description": "Limits the number of Videos returned. [NOTE: Acceptable values are 0 to 50, inclusive. Please see pagination docs for more details]"
+          ,"type": "textfield"
+          ,"value": "50"
+        },{
+          "name": "totalVar"
+          ,"description": "Define the key of a placeholder set by getYoutube indicating the total number of Videos returned."
+          ,"type": "textfield"
+          ,"value": ""
+        },{
+          "name": "safeSearch"
+          ,"description": "Select whether the results should include restricted content as well as standard content. [OPTIONS: none, moderate, strict]"
+          ,"type": "list"
+          ,"options": [{
+            "text": "none",
+            "value": "none"
+          },{
+            "text": "moderate",
+            "value": "moderate"
+          },{
+            "text": "strict",
+            "value": "strict"
+          }]
+          ,"value": "none"
+        }]
+      }]
+      ,"chunks": [{
+        "name": "videoTpl"
+        ,"description": "Example Chunk serving as a Template."
+        ,"file": "videotpl.chunk.tpl"
+      }]
+    }
+    ,"systemSettings": [{
+      "key": "api_key"
+      ,"type": "textfield"
+      ,"namespace": "getyoutube"
+      ,"area": "api"
+    }]
+  }
+  ,"build": {
+    "readme": "docs/readme.txt"
+    ,"license": "docs/license.txt"
+    ,"changelog": "docs/changelog.txt"
+  }
+}

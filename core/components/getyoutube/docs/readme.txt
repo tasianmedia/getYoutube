@@ -5,7 +5,7 @@ Version: 1.0.0-pl
 Released: April 14, 2014
 Since: February 25, 2014
 Author: David Pede <dev@tasianmedia.com> <https://twitter.com/davepede>
-Copyright: (C) 2014 David Pede. All rights reserved. <dev@tasianmedia.com>
+Copyright: (C) 2016 David Pede. All rights reserved. <dev@tasian.media>
 
 A simple video retrieval Snippet for MODX Revolution.
 

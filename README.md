@@ -1,8 +1,9 @@
-#getYoutube
+#getYoutube 1.0.0-pl
 ###A simple video retrieval Snippet for MODX Revolution
 
 ####Installation
 Simply download through MODX Package Management, and install.
+Also supports installation via 'Git Package Management' Extra: https://github.com/theboxer/Git-Package-Management 
 
 ####Documentation
 - Official Documentation: http://rtfm.modx.com/extras/revo/getyoutube
@@ -14,7 +15,7 @@ If you have a bug fix or improvement and would like to submit a Pull Request, pl
 ####Details
 Author: David Pede (dev@tasianmedia.com) (https://twitter.com/davepede)
 
-Copyright: (C) 2014 David Pede. All rights reserved. (dev@tasianmedia.com)
+Copyright: (C) 2016 David Pede. All rights reserved. (dev@tasian.media)
 
 ####Please Note
 getYoutube is not associated with or endorsed by YouTube, LLC.

@@ -2,13 +2,13 @@
 /**
  * A simple video retrieval Snippet for MODX Revolution.
  *
- * @author David Pede <dev@tasianmedia.com> <https://twitter.com/davepede>
+ * @author David Pede <dev@tasian.media> <https://twitter.com/davepede>
  * @version 1.0.0-pl
  * @released April 14, 2014
  * @since February 25, 2014
  * @package getyoutube
  *
- * Copyright (C) 2014 David Pede. All rights reserved. <dev@tasianmedia.com>
+ * Copyright (C) 2016 David Pede. All rights reserved. <dev@tasian.media>
  *
  * getYoutube is free software; you can redistribute it and/or modify it under the
  * terms of the GNU General Public License as published by the Free Software

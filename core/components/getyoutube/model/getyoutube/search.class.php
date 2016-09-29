@@ -42,6 +42,7 @@ class search {
       /* SET PLACEHOLDERS */
       $modx->setPlaceholder('id',$video['id']['videoId']);
       $modx->setPlaceholder('url',"https://www.youtube.com/watch?v=" . $video['id']['videoId']);
+      $modx->setPlaceholder('embed_url',"https://www.youtube.com/embed/" . $video['id']['videoId']);
       $modx->setPlaceholder('title',$video['snippet']['title']);
       $modx->setPlaceholder('description',$video['snippet']['description']);
       $modx->setPlaceholder('publish_date',$video['snippet']['publishedAt']);

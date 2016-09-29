@@ -92,6 +92,7 @@ class search {
       /* SET SNIPPET PLACEHOLDERS */
       $modx->setPlaceholder('id',$video['id']);
       $modx->setPlaceholder('url',"https://www.youtube.com/watch?v=" . $video['id']);
+      $modx->setPlaceholder('embed_url',"https://www.youtube.com/embed/" . $video['id']);
       $modx->setPlaceholder('title',$video['snippet']['title']);
       $modx->setPlaceholder('description',$video['snippet']['description']);
       $modx->setPlaceholder('publish_date',$video['snippet']['publishedAt']);

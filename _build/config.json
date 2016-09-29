@@ -81,7 +81,7 @@
           "name": "totalVar"
           ,"description": "Define the key of a placeholder set by getYoutube indicating the total number of Videos returned."
           ,"type": "textfield"
-          ,"value": ""
+          ,"value": "total"
         },{
           "name": "safeSearch"
           ,"description": "Select whether the results should include restricted content as well as standard content. [OPTIONS: none, moderate, strict]"

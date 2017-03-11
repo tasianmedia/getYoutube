@@ -30,6 +30,7 @@ if (!($getyoutube instanceof getYoutube)) return '';
 $apiKey = $modx->getOption('getyoutube.api_key',$scriptProperties);
 $mode = !empty($mode) ? $mode : ''; //Acceptable values are: channel, video
 $channel = !empty($channel) ? $channel : '';
+$playlist = !empty($playlist) ? $playlist : '';
 $video = !empty($video) ? $video : '';
 $tpl = !empty($tpl) ? $tpl : '';
 $tplAlt = !empty($tplAlt) ? $tplAlt : '';
@@ -51,6 +52,15 @@ switch ($mode) {
       $output = $query->channel($channelUrl,$tpl,$tplAlt,$toPlaceholder,$pageToken,$totalVar);
     }else{
       $modx->log(modX::LOG_LEVEL_ERROR, 'getYoutube() - &channel is required');
+    }
+    break;
+  case "playlist":
+    if (!empty($playlist)) {
+      $query = new search();
+      $playlistUrl = "https://www.googleapis.com/youtube/v3/playlistItems?part=id,snippet&playlistId=$playlist&type=video&safeSearch=$safeSearch&maxResults=$limit&order=$sortby&pageToken=$pageToken&key=$apiKey";
+      $output = $query->playlist($playlistUrl,$tpl,$tplAlt,$toPlaceholder,$pageToken,$totalVar);
+    }else{
+      $modx->log(modX::LOG_LEVEL_ERROR, 'getYoutube() - &playlist is required');
     }
     break;
   case "video":

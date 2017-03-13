@@ -20,9 +20,9 @@
 class search {
   public function channel($channelUrl,$tpl,$tplAlt,$toPlaceholder,$pageToken,$totalVar){
     global $modx;
-    
+
     $json = file_get_contents($channelUrl)
-    or $modx->log(modX::LOG_LEVEL_ERROR, 'getYoutube() - Channel API request not recognised');
+      or $modx->log(modX::LOG_LEVEL_ERROR, 'getYoutube() - Channel API request not recognised');
     $videos = json_decode($json, TRUE);
 
     /* SETUP PAGINATION */
@@ -32,12 +32,12 @@ class search {
     if (!empty($nextPageToken) ? $modx->setPlaceholder('nextPage',$modx->makeUrl($modx->resource->get('id'),'','?page='.$nextPageToken,'full')) : '');
     $prevPageToken = $videos['prevPageToken'];
     if (!empty($prevPageToken) ? $modx->setPlaceholder('prevPage',$modx->makeUrl($modx->resource->get('id'),'','?page='.$prevPageToken,'full')) : '');
-    
+
     $idx = 0; //Starts index at 0
     $total = 0;
-    
+
     $output = '';
-    
+
     foreach($videos['items'] as $video) {
       /* SET PLACEHOLDERS */
       $modx->setPlaceholder('id',$video['id']['videoId']);
@@ -61,7 +61,7 @@ class search {
         $rowTpl = $tpl;
       }
       $idx++; //Increases index by +1
-  
+
       $results .= $modx->getChunk($rowTpl,$video);
     }
     if(!empty($results)) {
@@ -75,9 +75,9 @@ class search {
   }
   public function playlist($playlistUrl,$tpl,$tplAlt,$toPlaceholder,$pageToken,$totalVar){
     global $modx;
-    
+
     $json = file_get_contents($playlistUrl)
-    or $modx->log(modX::LOG_LEVEL_ERROR, 'getYoutube() - Playlist API request not recognised');
+      or $modx->log(modX::LOG_LEVEL_ERROR, 'getYoutube() - Playlist API request not recognised');
     $videos = json_decode($json, TRUE);
 
     /* SETUP PAGINATION */
@@ -87,12 +87,12 @@ class search {
     if (!empty($nextPageToken) ? $modx->setPlaceholder('nextPage',$modx->makeUrl($modx->resource->get('id'),'','?page='.$nextPageToken,'full')) : '');
     $prevPageToken = $videos['prevPageToken'];
     if (!empty($prevPageToken) ? $modx->setPlaceholder('prevPage',$modx->makeUrl($modx->resource->get('id'),'','?page='.$prevPageToken,'full')) : '');
-    
+
     $idx = 0; //Starts index at 0
     $total = 0;
-    
+
     $output = '';
-    
+
     foreach($videos['items'] as $video) {
       /* SET PLACEHOLDERS */
       $modx->setPlaceholder('id',$video['snippet']['resourceId']['videoId']);
@@ -117,7 +117,7 @@ class search {
         $rowTpl = $tpl;
       }
       $idx++; //Increases index by +1
-  
+
       $results .= $modx->getChunk($rowTpl,$video);
     }
     if(!empty($results)) {
@@ -131,20 +131,20 @@ class search {
   }
   public function video($videoUrl,$tpl,$tplAlt,$toPlaceholder,$totalVar){
     global $modx;
-    
+
     $json = file_get_contents($videoUrl)
-    or $modx->log(modX::LOG_LEVEL_ERROR, 'getYoutube() - Video API request not recognised');
+      or $modx->log(modX::LOG_LEVEL_ERROR, 'getYoutube() - Video API request not recognised');
     $videos = json_decode($json, TRUE);
-    
+
     /* SET TOTAL PLACEHOLDERS */
     $total = $videos['pageInfo']['totalResults'];
     $modx->setPlaceholder($totalVar,$total);
-    
+
     $idx = 0; //Starts index at 0
     $total = 0;
-    
+
     $output = '';
-    
+
     foreach($videos['items'] as $video) {
       /* SET SNIPPET PLACEHOLDERS */
       $modx->setPlaceholder('id',$video['id']);
@@ -176,7 +176,7 @@ class search {
         $rowTpl = $tpl;
       }
       $idx++; //Increases index by +1
-  
+
       $results .= $modx->getChunk($rowTpl,$video);
     }
     if(!empty($results)) {

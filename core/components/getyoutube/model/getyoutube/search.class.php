@@ -44,12 +44,12 @@ class search {
       $modx->setPlaceholder('url',"https://www.youtube.com/watch?v=" . $video['id']['videoId']);
       $modx->setPlaceholder('embed_url',"https://www.youtube.com/embed/" . $video['id']['videoId']);
       $modx->setPlaceholder('title',$video['snippet']['title']);
+      $modx->setPlaceholder('channel_title',$video['snippet']['channelTitle']);
       $modx->setPlaceholder('description',$video['snippet']['description']);
       $modx->setPlaceholder('publish_date',$video['snippet']['publishedAt']);
       $modx->setPlaceholder('thumbnail_small',$video['snippet']['thumbnails']['default']['url']); //120px wide and 90px tall
       $modx->setPlaceholder('thumbnail_medium',$video['snippet']['thumbnails']['medium']['url']); //320px wide and 180px tall
       $modx->setPlaceholder('thumbnail_large',$video['snippet']['thumbnails']['high']['url']); //480px wide and 360px tall
-      $modx->setPlaceholder('channel_title',$video['snippet']['channelTitle']);
       /* SET TEMPLATES */
       if (!empty($tplAlt)) {
         if($idx % 2 == 0) { // Checks if index can be divided by 2 (alt)
@@ -96,16 +96,19 @@ class search {
     foreach($videos['items'] as $video) {
       /* SET PLACEHOLDERS */
       $modx->setPlaceholder('id',$video['snippet']['resourceId']['videoId']);
+      $modx->setPlaceholder('playlist_id',$video['snippet']['playlistId']);
       $modx->setPlaceholder('url',"https://www.youtube.com/watch?v=" . $video['snippet']['resourceId']['videoId']);
       $modx->setPlaceholder('embed_url',"https://www.youtube.com/embed/" . $video['snippet']['resourceId']['videoId']);
       $modx->setPlaceholder('title',$video['snippet']['title']);
+      $modx->setPlaceholder('channel_title',$video['snippet']['channelTitle']);
       $modx->setPlaceholder('description',$video['snippet']['description']);
       $modx->setPlaceholder('publish_date',$video['snippet']['publishedAt']);
       $modx->setPlaceholder('thumbnail_small',$video['snippet']['thumbnails']['default']['url']); //120px wide and 90px tall
       $modx->setPlaceholder('thumbnail_medium',$video['snippet']['thumbnails']['medium']['url']); //320px wide and 180px tall
       $modx->setPlaceholder('thumbnail_large',$video['snippet']['thumbnails']['high']['url']); //480px wide and 360px tall
-      $modx->setPlaceholder('channel_title',$video['snippet']['channelTitle']);
-      $modx->setPlaceholder('playlist_id',$video['snippet']['playlistId']);
+      $modx->setPlaceholder('thumbnail_standard',$video['snippet']['thumbnails']['standard']['url']); //640px wide and 480px tall
+      $modx->setPlaceholder('thumbnail_maxres',$video['snippet']['thumbnails']['maxres']['url']); //1280px wide and 720px tall
+      
       /* SET TEMPLATES */
       if (!empty($tplAlt)) {
         if($idx % 2 == 0) { // Checks if index can be divided by 2 (alt)
@@ -151,12 +154,14 @@ class search {
       $modx->setPlaceholder('url',"https://www.youtube.com/watch?v=" . $video['id']);
       $modx->setPlaceholder('embed_url',"https://www.youtube.com/embed/" . $video['id']);
       $modx->setPlaceholder('title',$video['snippet']['title']);
+      $modx->setPlaceholder('channel_title',$video['snippet']['channelTitle']);
       $modx->setPlaceholder('description',$video['snippet']['description']);
       $modx->setPlaceholder('publish_date',$video['snippet']['publishedAt']);
       $modx->setPlaceholder('thumbnail_small',$video['snippet']['thumbnails']['default']['url']); //120px wide and 90px tall
       $modx->setPlaceholder('thumbnail_medium',$video['snippet']['thumbnails']['medium']['url']); //320px wide and 180px tall
       $modx->setPlaceholder('thumbnail_large',$video['snippet']['thumbnails']['high']['url']); //480px wide and 360px tall
-      $modx->setPlaceholder('channel_title',$video['snippet']['channelTitle']);
+      $modx->setPlaceholder('thumbnail_standard',$video['snippet']['thumbnails']['standard']['url']); //640px wide and 480px tall
+      $modx->setPlaceholder('thumbnail_maxres',$video['snippet']['thumbnails']['maxres']['url']); //1280px wide and 720px tall
       /* SET CONTENT DETAIL PLACEHOLDERS */
       $modx->setPlaceholder('duration',$video['contentDetails']['duration']);
       /* SET STATISTIC PLACEHOLDERS */

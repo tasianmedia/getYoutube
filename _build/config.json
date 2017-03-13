@@ -3,7 +3,7 @@
   ,"lowCaseName": "getyoutube"
   ,"description": "A simple video retrieval Snippet for MODX Revolution"
   ,"author": "David Pede <dev@tasianmedia.com> <https://twitter.com/davepede>"
-  ,"version": "1.0.0-pl"
+  ,"version": "1.1.0-pl"
   ,"package":{
     "actions": [{
       "id": 1

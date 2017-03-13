@@ -27,6 +27,9 @@
           },{
             "text": "video",
             "value": "video"
+          },{
+            "text": "playlist",
+            "value": "playlist"
           }]
           ,"value": "video"
         },{
@@ -37,6 +40,11 @@
         },{
           "name": "video"
           ,"description": "A comma-separated list of numeric video IDs to return."
+          ,"type": "textfield"
+          ,"value": ""
+        },{
+          "name": "playlist"
+          ,"description": "The numeric ID of a YouTube Playlist to search. All videos within the playlist will be returned."
           ,"type": "textfield"
           ,"value": ""
         },{

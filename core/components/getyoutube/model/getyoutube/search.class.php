@@ -73,6 +73,61 @@ class search {
     }
     return $output;
   }
+  public function playlist($playlistUrl,$tpl,$tplAlt,$toPlaceholder,$pageToken,$totalVar){
+    global $modx;
+    
+    $json = file_get_contents($playlistUrl)
+    or $modx->log(modX::LOG_LEVEL_ERROR, 'getYoutube() - Playlist API request not recognised');
+    $videos = json_decode($json, TRUE);
+
+    /* SETUP PAGINATION */
+    $total = $videos['pageInfo']['totalResults'];
+    $modx->setPlaceholder($totalVar,$total);
+    $nextPageToken = $videos['nextPageToken'];
+    if (!empty($nextPageToken) ? $modx->setPlaceholder('nextPage',$modx->makeUrl($modx->resource->get('id'),'','?page='.$nextPageToken,'full')) : '');
+    $prevPageToken = $videos['prevPageToken'];
+    if (!empty($prevPageToken) ? $modx->setPlaceholder('prevPage',$modx->makeUrl($modx->resource->get('id'),'','?page='.$prevPageToken,'full')) : '');
+    
+    $idx = 0; //Starts index at 0
+    $total = 0;
+    
+    $output = '';
+    
+    foreach($videos['items'] as $video) {
+      /* SET PLACEHOLDERS */
+      $modx->setPlaceholder('id',$video['snippet']['resourceId']['videoId']);
+      $modx->setPlaceholder('url',"https://www.youtube.com/watch?v=" . $video['snippet']['resourceId']['videoId']);
+      $modx->setPlaceholder('title',$video['snippet']['title']);
+      $modx->setPlaceholder('description',$video['snippet']['description']);
+      $modx->setPlaceholder('publish_date',$video['snippet']['publishedAt']);
+      $modx->setPlaceholder('thumbnail_small',$video['snippet']['thumbnails']['default']['url']); //120px wide and 90px tall
+      $modx->setPlaceholder('thumbnail_medium',$video['snippet']['thumbnails']['medium']['url']); //320px wide and 180px tall
+      $modx->setPlaceholder('thumbnail_large',$video['snippet']['thumbnails']['high']['url']); //480px wide and 360px tall
+      $modx->setPlaceholder('channel_title',$video['snippet']['channelTitle']);
+      $modx->setPlaceholder('playlist_id',$video['snippet']['playlistId']);
+      /* SET TEMPLATES */
+      if (!empty($tplAlt)) {
+        if($idx % 2 == 0) { // Checks if index can be divided by 2 (alt)
+          $rowTpl = $tpl;
+        }else{
+          $rowTpl = $tplAlt;
+        }
+      }else{
+        $rowTpl = $tpl;
+      }
+      $idx++; //Increases index by +1
+  
+      $results .= $modx->getChunk($rowTpl,$video);
+    }
+    if(!empty($results)) {
+      if (!empty($toPlaceholder)) {
+        $output = $modx->setPlaceholder($toPlaceholder,$results); //Set '$toPlaceholder' placeholder
+      }else{
+        $output = $results;
+      }
+    }
+    return $output;
+  }
   public function video($videoUrl,$tpl,$tplAlt,$toPlaceholder,$totalVar){
     global $modx;
     

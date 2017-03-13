@@ -1,5 +1,9 @@
 Changelog for getYoutube.
 
+getYoutube 1.1.0-pl (March 13, 2017)
+====================================
+- Add playlist support
+
 getYoutube 1.0.0-pl (April 14, 2014)
 ====================================
 - Initial content.

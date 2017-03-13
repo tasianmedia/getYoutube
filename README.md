@@ -1,4 +1,4 @@
-#getYoutube 1.0.0-pl
+#getYoutube 1.1.0-pl
 ###A simple video retrieval Snippet for MODX Revolution
 
 ####Installation
@@ -15,7 +15,7 @@ If you have a bug fix or improvement and would like to submit a Pull Request, pl
 ####Details
 Author: David Pede (dev@tasianmedia.com) (https://twitter.com/davepede)
 
-Copyright: (C) 2016 David Pede. All rights reserved. (dev@tasian.media)
+Copyright: (C) 2017 David Pede. All rights reserved. (dev@tasian.media)
 
 ####Please Note
 getYoutube is not associated with or endorsed by YouTube, LLC.

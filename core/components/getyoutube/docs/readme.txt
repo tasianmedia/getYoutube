@@ -1,11 +1,11 @@
 --------------------
 Extra: getYoutube
 --------------------
-Version: 1.0.0-pl
-Released: April 14, 2014
+Version: 1.1.0-pl
+Released: March 13, 2017
 Since: February 25, 2014
 Author: David Pede <dev@tasianmedia.com> <https://twitter.com/davepede>
-Copyright: (C) 2016 David Pede. All rights reserved. <dev@tasian.media>
+Copyright: (C) 2017 David Pede. All rights reserved. <dev@tasian.media>
 
 A simple video retrieval Snippet for MODX Revolution.
 

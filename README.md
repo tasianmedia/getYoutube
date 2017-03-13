@@ -1,4 +1,4 @@
-#getYoutube 1.1.0-pl
+#getYoutube 1.1.1-pl
 ###A simple video retrieval Snippet for MODX Revolution
 
 ####Installation

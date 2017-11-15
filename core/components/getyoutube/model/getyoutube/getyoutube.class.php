@@ -18,25 +18,24 @@
  */
 
 class getYoutube {
-    public $modx;
-    public $config = array();
-    function __construct(modX &$modx,array $config = array()) {
-        $this->modx =& $modx;
- 
-        $corePath = $this->modx->getOption('getyoutube.core_path',$config,$this->modx->getOption('core_path').'components/getyoutube/');
-        //$assetsUrl = $this->modx->getOption('getyoutube.assets_url',$config,$this->modx->getOption('assets_url').'components/getyoutube/');
-        $this->config = array_merge(array(
-            'basePath' => $corePath,
-            'corePath' => $corePath,
-            'modelPath' => $corePath.'model/getyoutube/',
-            //'processorsPath' => $corePath.'processors/',
-            //'templatesPath' => $corePath.'templates/',
-            'chunksPath' => $corePath.'elements/chunks/',
-            //'jsUrl' => $assetsUrl.'js/',
-            //'cssUrl' => $assetsUrl.'css/',
-            //'assetsUrl' => $assetsUrl,
-            //'connectorUrl' => $assetsUrl.'connector.php',
-        ),$config);
- 
-    }
+  public $modx;
+  public $config = array();
+  function __construct(modX &$modx,array $config = array()) {
+    $this->modx =& $modx;
+    $corePath = $this->modx->getOption('getyoutube.core_path',$config,$this->modx->getOption('core_path').'components/getyoutube/');
+    $assetsUrl = $this->modx->getOption('getyoutube.assets_url',$config,$this->modx->getOption('assets_url').'components/getyoutube/');
+    $this->config = array_merge(array(
+      'basePath' => $corePath,
+      'corePath' => $corePath,
+      'modelPath' => $corePath.'model/getyoutube/',
+      'processorsPath' => $corePath.'processors/',
+      'templatesPath' => $corePath.'templates/',
+      'chunksPath' => $corePath.'elements/chunks/',
+      'jsUrl' => $assetsUrl.'js/',
+      'cssUrl' => $assetsUrl.'css/',
+      'assetsUrl' => $assetsUrl,
+      'connectorUrl' => $assetsUrl.'connector.php',
+    ),$config);
+    $this->modx->addPackage('getyoutube',$this->config['modelPath']);
+  }
 }

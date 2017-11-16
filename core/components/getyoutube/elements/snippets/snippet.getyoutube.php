@@ -3,8 +3,8 @@
  * A simple video retrieval Snippet for MODX Revolution.
  *
  * @author David Pede <dev@tasian.media> <https://twitter.com/davepede>
- * @version 1.1.1-pl
- * @released March 13, 2017
+ * @version 1.2.0-pl
+ * @released November 16, 2017
  * @since February 25, 2014
  * @package getyoutube
  *

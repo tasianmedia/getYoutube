@@ -1,8 +1,8 @@
 --------------------
 Extra: getYoutube
 --------------------
-Version: 1.1.1-pl
-Released: March 13, 2017
+Version: 1.2.0-pl
+Released: November 16, 2017
 Since: February 25, 2014
 Author: David Pede <dev@tasianmedia.com> <https://twitter.com/davepede>
 Copyright: (C) 2016 David Pede. All rights reserved. <dev@tasian.media>

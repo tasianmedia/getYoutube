@@ -1,5 +1,10 @@
 Changelog for getYoutube.
 
+getYoutube 1.2.0-pl (November 16, 2017)
+====================================
+- Add tags placeholder to output in video mode
+- Replace 'file_get_contents()' function with CURL
+
 getYoutube 1.1.1-pl (March 13, 2017)
 ====================================
 - Add additional thumbnail sizes
